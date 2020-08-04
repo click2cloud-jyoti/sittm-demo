@@ -1,0 +1,9 @@
+<div class="container">
+    <div ng-controller="mainCtrl" class="row-fluid">
+        <form class="row-fluid">
+            <div class="container-fluid">
+                Country Name <input type="text" class="form-control autocomplete" ng-model="selected" typeahead="state for state in states | filter:$viewValue">
+            </div>
+        </form>
+    </div>
+</div>

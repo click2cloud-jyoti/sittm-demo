@@ -1,0 +1,33 @@
+$computer = "ComputerName"
+$userName = "UserName"
+$password = "5k#V@Ee8f6"
+
+function test-AccountLogin
+{
+[CmdletBinding()]
+Param
+(
+[Parameter(ValueFromPipeline=$True, Position=0, Mandatory=$True)]
+[string[]]$computer,
+[Parameter(ValueFromPipeline=$True, Position=1, Mandatory=$True)]
+[string[]]$userName
+,[Parameter(ValueFromPipeline=$True, Position=2, Mandatory=$True)]
+$password
+)
+
+BEGIN {}
+
+Process {
+$securepwd = ConvertTo-SecureString $password -asplaintext -force
+#$account = "DOMAINNAME"+"\"+$($username)
+$account = $($computer)+"\"+$($username)
+$credential = New-Object System.Management.Automation.PSCredential($account,$securepwd)
+
+
+$colItems = Get-WmiObject -Class Win32_Process -Locale "MS_409" -Namespace "root\cimv2" -Credential $credential -ComputerName $computer
+
+foreach ($ObjItem in $colItems)
+{
+write-host "Process Name:" $ObjItem.name
+}
+}

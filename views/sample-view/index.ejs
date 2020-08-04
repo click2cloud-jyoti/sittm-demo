@@ -1,0 +1,277 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <title>Secure Infrastructure Technical Talent Management</title>
+
+    <!-- <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Secure Infrastructure Technical Talent Management">
+    <meta name="msapplication-tap-highlight" content="no"> -->
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <link rel="icon" type="image/png" sizes="32x32" href="imagesfavicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="imagesfavicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagesfavicon-16x16.png">
+    <link href="stylesheets/main.css" rel="stylesheet">
+    <script src="<%= angularJS %>"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    .main-tab-container {
+        background: #fff;
+        height: 70px;
+        padding: 0px 150px;
+        box-shadow: 0px 7px 10px rgba(204, 204, 204, 0.25098039215686274);
+        margin-bottom: 20px;
+    }
+
+    .main-title {
+        color: #9B9B9B;
+        font-weight: 500;
+        font-size: 25px;
+        display: flex;
+        margin: 0;
+        height: 70px;
+        align-items: center;
+    }
+
+    .main-tabs.card-header {
+        background-color: transparent;
+        height: 70px;
+    }
+
+    .main-tabs.card-header>.nav .nav-link {
+        color: #404042;
+        text-transform: uppercase;
+    }
+
+    .main-tabs.card-header.card-header-tab .nav {
+        margin-left: 0;
+        height: auto;
+        align-self: flex-end;
+    }
+
+    .main-tabs.nav-link {
+        padding: 12px 22px;
+    }
+
+    .main-tabs.card-header>.nav .nav-link.active {
+        color: #5C73B7 !important;
+    }
+
+    .main-tabs.card-header>.nav .nav-link::before {
+        background: #4F71ED;
+        height: 3px;
+        border-radius: 0;
+        bottom: 0px;
+    }
+
+    .img-responsive {
+        width: 115px;
+    }
+
+    .main-tab-content object {
+        width: 100%;
+    }
+
+    /* LOGIN/LOGOUT SECTION */
+    .sign_in_btn {
+        background: #f44c76;
+        margin-top: 16px;
+        padding: 12px 0px 15px 15px !important;
+        width: 51%;
+        float: right;
+        color: #fff;
+        font-size: 14px !important;
+    }
+
+    .sign_in_btn:hover {
+        color: #ffb5c8 !important;
+    }
+
+    .dropdown-toggle::after {
+        position: relative;
+        top: 0px;
+        opacity: .8;
+        margin-left: 0px;
+    }
+
+    .avatar_section {
+        margin-top: 12px;
+    }
+
+    .dm {
+        position: absolute !important;
+        transform: none !important;
+        top: 70px !important;
+        right: 0px !important;
+        will-change: unset !important;
+        left: -165px !important;
+    }
+</style>
+
+<body>
+    <div ng-app="indexApp" ng-controller="indexController" ng-cloak>
+        <div class='main-tab-container' ng-init="init('<%= JSON.stringify(data) %>')">
+            <div class='row'>
+                <div class="col-md-2">
+                    <h2 class='main-title'><img src="images/logo.svg" class="img-responsive"></h2>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-header-tab main-tabs card-header">
+                        <ul class="nav">
+                            <li class="nav-item" ng-show="User.email"><a data-toggle="tab" href="#home"
+                                    class="active nav-link">Home</a></li>
+                            <li class="nav-item" ng-if="User.email"><a data-toggle="tab" href="#individualCard"
+                                    class="nav-link">Individual
+                                    Card</a>
+                            </li>
+                            <li class="nav-item" ng-if="User.email"><a data-toggle="tab" href="#tzView"
+                                    class="nav-link">Tz View</a></li>
+                            <li class="nav-item" ng-if="User.email"><a data-toggle="tab" href="#globalView"
+                                    class="nav-link">Global
+                                    View</a>
+                            </li>
+                            <li class="nav-item" ng-if="User.email"><a data-toggle="tab" href="#nominateTalent"
+                                    class="nav-link">Nominate a
+                                    Talent</a></li>
+                            <li class="nav-item" ng-if="User.email"><a data-toggle="tab" href="#access"
+                                    class="nav-link">Access</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!-- {{User}} -->
+                    <!-- <div class="collapse navbar-collapse" id="navbarCollapse">
+                        
+                    </div> -->
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item dropdown" ng-if="User.email">
+                            <a class="nav-link dropdown-toggle pull-right avatar_section" data-toggle="dropdown"
+                                href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <!-- <img src="{{ user.avatar }}" class="rounded-circle align-self-center mr-2" style="width: 32px;"> -->
+
+                                <!-- <i class="far fa-user-circle fa-lg rounded-circle align-self-center"></i> -->
+                                <img src="images/users/user_default.png" class="rounded-circle align-self-center"
+                                    style="width: 30px; margin-right: 5px;" />
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dm">
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="display:inline-flex;">
+                                    <div class="col-md-2 col-sm-2 col-xs-6" style="padding:0px">
+                                        <img src="images/users/user_default.png" class="rounded-circle"
+                                            style="width: 75px; margin-top: 0px;" />
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-6"
+                                        style="padding-left: 30px;padding-top: 15px;">
+                                        <h5 class="dropdown-item-text mb-0" style="padding: 0px 15px 0px 0px;">
+                                            {{User.displayName}}</h5>
+                                        <p class="dropdown-item-text text-muted mb-0"
+                                            style="padding: 0px 15px 0px 0px;">{{User.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <a href="/auth/signout" class="dropdown-item"><i class="fa fa-sign-out"
+                                            aria-hidden="true"></i>&nbsp;Sign Out</a>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li class="nav-item" ng-if="!User.email">
+                            <a href="/auth/signin" class="nav-link btn sign_in_btn pull-right" id="ssosignin"><i
+                                    class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content main-tab-content">
+            <!--Home Tab Start-->
+            <div class="tab-pane active" id="home" role="tabpanel">
+                <object data="/home" style="margin-top:-20px;"></object>
+            </div>
+            <!--Home Tab End-->
+
+            <!--Individual Card Tab Start-->
+            <div class="tab-pane" id="individualCard" role="tabpanel" ng-if="User.email">
+                <object data="/individual-card-manager"></object>
+            </div>
+            <!--Individual Card Tab End-->
+
+            <!--tzView Tab Start-->
+            <div class="tab-pane" id="tzView" role="tabpanel" ng-if="User.email">
+                <object data="/dashboard"></object>
+            </div>
+            <!--tzView Tab End-->
+
+            <!--globalView Tab Start-->
+            <div class="tab-pane" id="globalView" role="tabpanel" ng-if="User.email">
+
+            </div>
+            <!--globalView Tab End-->
+
+            <!--nominateTalent Tab Start -->
+            <div class="tab-pane" id="nominateTalent" role="tabpanel" ng-if="User.email">
+                <object data="/nominate-talent" style="margin-top:-20px;"></object>
+            </div>
+            <!--nominateTalent Tab End-->
+
+            <!--access Tab Start -->
+            <div class="tab-pane" id="access" role="tabpanel" ng-if="User.email">
+
+            </div>
+            <!--access Tab End-->
+        </div>
+    </div>
+    <script>
+        angular.module('indexApp', []).controller('indexController', function ($scope) {
+            $scope.init = function (data) {
+                $scope.User = {
+                    displayName: null,
+                    email: null
+                }
+                userData = JSON.parse(data);
+                // $scope.$apply(function () {
+                //     $scope.User = userData.user || undefined;
+                // });
+
+                $scope.User = {
+                    displayName: userData.user.displayName,
+                    email: userData.user.email
+                }
+
+
+                console.log($scope.User);
+            }
+        })
+    </script>
+
+</body>
+<script type="text/javascript" src="javascripts/main.js"></script>
+<script>
+    var x = window.innerHeight - 95 + 'px';
+    var elem = document.getElementsByTagName("object");
+    for (var i = 0; i < elem.length; i++) {
+        elem[i].style.height = x;
+    }
+</script>
+</body>
+
+</html>
